@@ -1,0 +1,10 @@
+{
+	"name":"Meltdown",
+	"author":"Troels Bjerre Lund",
+	"version":"0.0.1",
+	"factorio_version": "0.15",
+	"title":"Meltdown",
+	"homepage":"https://forums.factorio.com/viewtopic.php?f=144&t=28817",
+	"description":"With great energy comes great responsibility. If nuclear reactors reach 1000 degrees, they start taking damage. If a hot reactor (>900 degree) is removed or destroyed, it will cause a nuclear explosion and create massive pollution.",
+	"dependencies": ["base >= 0.15.10"]
+}
