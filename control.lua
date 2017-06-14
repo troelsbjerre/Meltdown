@@ -16,23 +16,6 @@ local function remove(event)
 	end
 end
 
-local function rebuild_data()
-    --[[Setup the global reactors table This table contains the machine entity, the signal entity and the freeze variable]]--
-    global.reactors = {}
-    global.index = nil
-
-    --[[Find all nuclear reactors on the map. Check each surface]]--
-    for _, surface in pairs(game.surfaces) do
-        --find-entities-filtered with no area argument scans for all entities in loaded chunks and should
-        --be more effiecent then scanning through all chunks like in previous version
-
-        --[[Find all assembling machines within the bounds, and pretend that they were just built]]--
-        for _, reactor in pairs(surface.find_entities_filtered{type="reactor"}) do
-            built({created_entity = reactor})
-        end
-    end
-end
-
 local function on_tick(event)
 	local next = next --very slight perfomance improvment
 	local tick = event.tick
@@ -76,6 +59,23 @@ local function built(event)
 		global.reactors[entity.unit_number] = { reactor = entity, temperature = entity.temperature }
 		script.on_event(defines.events.on_tick, on_tick)
 	end
+end
+
+local function rebuild_data()
+    --[[Setup the global reactors table This table contains the machine entity, the signal entity and the freeze variable]]--
+    global.reactors = {}
+    global.index = nil
+
+    --[[Find all nuclear reactors on the map. Check each surface]]--
+    for _, surface in pairs(game.surfaces) do
+        --find-entities-filtered with no area argument scans for all entities in loaded chunks and should
+        --be more effiecent then scanning through all chunks like in previous version
+
+        --[[Find all assembling machines within the bounds, and pretend that they were just built]]--
+        for _, reactor in pairs(surface.find_entities_filtered{type="reactor"}) do
+            built({created_entity = reactor})
+        end
+    end
 end
 
 --[[ Setup event handlers ]]--
